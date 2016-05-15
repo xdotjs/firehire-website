@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+<head>
+	<title>Job List App</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<!-- Main CSS -->
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span class="glyphicon glyphicon-fire"></span> FireHire</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#"><span class="glyphicon glyphicon-signal"></span> Dashboard</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Apply</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-repeat"></span> Follow-Up</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-calendar"></span> Interview</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container-fluid" ng-controller="AppCtrl">
+		<div class="alert alert-danger" id="reminder">
+			<strong>Reminder:</strong> When editing an existing job, make sure to hit CLEAR first and hit the UPDATE button when finished. Do not hit '+' again!
+		</div>
+		<h1><span class="glyphicon glyphicon-signal"></span> Dashboard</h1>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Company</th>
+						<th>Location</th>
+						<th>Position</th>
+						<th>Salary</th>
+						<th>Direct Hire</th>
+						<th>Contact</th>
+						<th>Email</th>
+						<th>Phone</th>
+						<th>Date Applied</th>
+						<th>Follow-Up</th>
+						<th>Action</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input class="form-control" ng-model="company.name"></td>
+						<td><input class="form-control" ng-model="company.location"></td>
+						<td><input class="form-control" ng-model="company.position"></td>
+						<td><input class="form-control" ng-model="company.salary"></td>
+						<td><input class="form-control" ng-model="company.recruit_direct"></td>
+						<td><input class="form-control" ng-model="company.contact"></td>
+						<td><input class="form-control" ng-model="company.email"></td>
+						<td><input class="form-control" ng-model="company.phone"></td>
+						<td><input class="form-control" ng-model="company.applied"></td>
+						<td><input class="form-control" ng-model="company.follow"></td>
+						<td><button class="btn btn-primary" ng-click="addContact()"><span class="glyphicon glyphicon-plus"></span></button></td>
+						<td>
+							<button class="btn btn-info" ng-click="update()"><span class="glyphicon glyphicon-floppy-saved"></span></button>
+							&nbsp;&nbsp;
+							<button class="btn btn-info" ng-click="deselect();"><span class="glyphicon glyphicon-refresh"></span></button>
+						</td>
+					</tr>
+					<tr ng-repeat="company in joblist">
+						<td>{{company.name}}</td>
+						<td>{{company.location}}</td>
+						<td>{{company.position}}</td>
+						<td>{{company.salary}}</td>
+						<td>{{company.recruit_direct}}</td>
+						<td>{{company.contact}}</td>
+						<td>{{company.email}}</td>
+						<td>{{company.phone}}</td>
+						<td>{{company.applied}}</td>
+						<td>{{company.follow}}</td>
+						<td><button class="btn btn-danger" ng-click="remove(company._id)"><span class="glyphicon glyphicon-remove"></span></button></td>
+						<td><button class="btn btn-warning" ng-click="edit(company._id)"><span class="glyphicon glyphicon-edit"></span></button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<!-- Minified Bootstrap JS -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- Angular -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<!-- Angular Controller -->
+<script type="text/javascript" src="controllers/controller.js"></script>
+</body>
+</html>
